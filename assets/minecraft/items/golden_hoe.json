@@ -1,0 +1,296 @@
+{
+    "model": {
+        "type": "minecraft:select",
+        "property": "component",
+        "component": "custom_model_data",
+        "fallback": {
+            "type": "model",
+            "model": "minecraft:item/golden_hoe"
+        },
+        "cases": [
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/add"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/add_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/add"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/add_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/add-front"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/add-front_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/add-front"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/add-front_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/add-left"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/add-left_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/add-left"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/add-left_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/add-right"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/add-right_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/add-right"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/add-right_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/add-tp"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/add-tp_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/add-tp"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/add-tp_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/move"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/move_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/move"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/move_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/new"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/new_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/new"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/new_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/remove"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/remove_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/remove"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/remove_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/remove-to-group"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/remove-to-group_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/remove-to-group"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/remove-to-group_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/rename"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/rename_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/rename"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/rename_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/selector"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/selector_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/selector"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/selector_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/width-down"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/width-down_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/width-down"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/width-down_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/path/width-up"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/width-up_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/path/width-up"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/path/width-up_off"
+                }
+            }
+        ]
+    }
+}
