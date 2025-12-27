@@ -5,8 +5,8 @@
 		64
 	],
 	"textures": {
-		"0": "TEXTURE_PLACEHOLDER",
-		"particle": "TEXTURE_PLACEHOLDER"
+		"0": "spacenoop.tower-defense:item/editor/path/add-front_off",
+		"particle": "spacenoop.tower-defense:item/editor/path/add-front_off"
 	},
 	"gui_light": "front",
 	"elements": [
