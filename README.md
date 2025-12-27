@@ -1,1 +1,1 @@
-"# NoopCraft-RessourcePack" 
+# NoopCraft-RessourcePack
