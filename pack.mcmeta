@@ -1,8 +1,8 @@
 {
   "pack": {
-    "description": "SpaceNoop <<==--==>> NoopCraft",
+    "description": "noopcraft.spacenoop.fr ｜ 1.21.10",
     "min_format": [69, 0],
     "max_format": [2147483647, 0]
   },
-  "version": "1.0.-1"
+  "version": "0.0.0"
 }
