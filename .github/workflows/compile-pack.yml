@@ -108,7 +108,7 @@ jobs:
             **Changes:**
             ${{ github.event.head_commit.message }}
           files: |
-            "${{ env.zip_name }}"
+            ${{ env.zip_name }}
           draft: false
           prerelease: false
           make_latest: true
