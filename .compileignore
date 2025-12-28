@@ -4,3 +4,4 @@ README.md
 *.devonly/
 .compileignore
 .gitignore
+.github/
