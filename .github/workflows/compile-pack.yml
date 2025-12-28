@@ -82,7 +82,7 @@ jobs:
       - name: Create ZIP archive
         run: |
           VERSION="${{ steps.get_version.outputs.version }}"
-          ZIP_NAME="NoopCraft_Pack__v${VERSION}.zip"
+          ZIP_NAME="NoopCraft_Pack_v${VERSION}.zip"
 
           cd build-temp
           zip -r "../$ZIP_NAME" . -x "*.git*"
@@ -106,7 +106,7 @@ jobs:
 
             **Changes:**
             ${{ github.event.head_commit.message }}
-          files: NoopCraft pack - *.zip
+          files: NoopCraft_Pack_v*.zip
           draft: false
           prerelease: false
           make_latest: true
