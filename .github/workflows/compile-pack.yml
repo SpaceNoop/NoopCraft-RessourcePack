@@ -82,20 +82,14 @@ jobs:
       - name: Create ZIP archive
         run: |
           VERSION="${{ steps.get_version.outputs.version }}"
-          ZIP_NAME_SAFE="NoopCraft_pack_${VERSION}.zip"
-          ZIP_NAME_DISPLAY="NoopCraft pack - ${VERSION}.zip"
+          ZIP_NAME="NoopCraft_Pack__v${VERSION}.zip"
 
           cd build-temp
-          zip -r "../$ZIP_NAME_SAFE" . -x "*.git*"
+          zip -r "../$ZIP_NAME" . -x "*.git*"
           cd ..
 
-          ln -s "$ZIP_NAME_SAFE" "$ZIP_NAME_DISPLAY"
-
-          echo "Created ZIP: $ZIP_NAME_DISPLAY"
-          ls -lh "$ZIP_NAME_DISPLAY"
-
-          echo "zip_name=$ZIP_NAME_DISPLAY" >> $GITHUB_ENV
-      
+          echo "Created ZIP: $ZIP_NAME"
+          ls -lh "$ZIP_NAME"
       
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2.5.0
