@@ -1,7 +1,8 @@
+.idea
 .vscode
 README.md
 *.devonly
-*.devonly/
 .compileignore
 .gitignore
 .github/
+build-temp/

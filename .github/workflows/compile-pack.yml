@@ -91,7 +91,30 @@ jobs:
 
           echo "Created ZIP: $ZIP_NAME"
           ls -lh "$ZIP_NAME"
-          echo "zip_name=$ZIP_NAME" >> $GITHUB_ENV
+          printf '%s\n' "zip_name=$ZIP_NAME" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2.5.0
+        with:
+          tag_name: "v${{ steps.get_version.outputs.version }}"
+          name: "NoopCraft Pack v${{ steps.get_version.outputs.version }}"
+          body: |
+            ## NoopCraft Resource Pack v${{ steps.get_version.outputs.version }}
+
+            **Build Information:**
+            - Commit: [${{ github.sha }}](https://github.com/SpaceNoop/NoopCraft-RessourcePack/tree/${{ github.sha }})
+            - Branch: [${{ github.ref_name }}](https://github.com/SpaceNoop/NoopCraft-RessourcePack/tree/${{ github.ref_name }})
+            - Build Date: ${{ github.event.head_commit.timestamp }}
+
+            **Changes:**
+            ${{ github.event.head_commit.message }}
+          files: |
+            ${{ env.zip_name }}
+          draft: false
+          prerelease: false
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Bump version
         id: bump_version
@@ -126,30 +149,3 @@ jobs:
           git add pack.mcmeta
           git commit -m "Bump version to ${{ steps.bump_version.outputs.new_version }}"
           git push
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: "v${{ steps.get_version.outputs.version }}"
-          name: "NoopCraft Pack v${{ steps.get_version.outputs.version }}"
-          body: |
-            ## NoopCraft Resource Pack v${{ steps.get_version.outputs.version }}
-
-            **Build Information:**
-            - Commit: ${{ github.sha }}
-            - Branch: ${{ github.ref_name }}
-            - Build Date: ${{ github.event.head_commit.timestamp }}
-
-            **Changes:**
-            ${{ github.event.head_commit.message }}
-
-            ---
-
-            Download the ZIP file below and place it in your Minecraft resource packs folder.
-          files: |
-            ${{ env.zip_name }}
-          draft: false
-          prerelease: false
-          make_latest: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
