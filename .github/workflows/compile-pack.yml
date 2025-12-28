@@ -11,34 +11,34 @@ permissions:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Setup Node.js for JSON minification
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      
+
       - name: Get pack version
         id: get_version
         run: |
           VERSION=$(jq -r '.version' pack.mcmeta)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Current version: $VERSION"
-      
+
       - name: Prepare build directory
         run: |
           # Create temporary build directory
           mkdir -p build-temp
-          
+
           # Copy all files except .git
           rsync -av --exclude='.git' ./ build-temp/
-          
+
           # Read .compileignore and remove matching files/directories
           if [ -f ".compileignore" ]; then
             while IFS= read -r pattern || [ -n "$pattern" ]; do
@@ -46,9 +46,9 @@ jobs:
               if [ -z "$pattern" ] || [[ "$pattern" =~ ^[[:space:]]*# ]]; then
                 continue
               fi
-              
+
               echo "Removing pattern: $pattern"
-              
+
               # Remove matching files/directories
               if [[ "$pattern" == */ ]]; then
                 # Directory pattern
@@ -59,72 +59,72 @@ jobs:
               fi
             done < .compileignore
           fi
-          
+
           echo "Build directory prepared"
           ls -la build-temp/
-      
+
       - name: Minify JSON and mcmeta files
         run: |
           # Install jq for JSON minification
           sudo apt-get update && sudo apt-get install -y jq
-          
+
           # Find and minify all .json and .mcmeta files
           find build-temp -type f \( -name "*.json" -o -name "*.mcmeta" \) | while read -r file; do
             echo "Minifying: $file"
             # Create a temporary file for minified content
             jq -c . "$file" > "$file.tmp" && mv "$file.tmp" "$file"
           done
-          
+
           echo "JSON/mcmeta files minified"
-      
+
       - name: Create ZIP archive
         run: |
           VERSION="${{ steps.get_version.outputs.version }}"
           ZIP_NAME="NoopCraft pack - $VERSION.zip"
-          
+
           # Create ZIP from build-temp directory, maintaining structure
           cd build-temp
           zip -r "../$ZIP_NAME" . -x "*.git*"
           cd ..
-          
+
           echo "Created ZIP: $ZIP_NAME"
           ls -lh "$ZIP_NAME"
           echo "zip_name=$ZIP_NAME" >> $GITHUB_ENV
-      
+
       - name: Bump version
         id: bump_version
         run: |
           VERSION="${{ steps.get_version.outputs.version }}"
           echo "Current version: $VERSION"
-          
+
           # Parse version components (handle negative versions like 1.0.-1)
           IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
-          
+
           # If patch is negative, set it to 0, otherwise increment it
           if [ "$PATCH" -lt 0 ]; then
             NEW_PATCH=0
           else
             NEW_PATCH=$((PATCH + 1))
           fi
-          
+
           NEW_VERSION="${MAJOR}.${MINOR}.${NEW_PATCH}"
           echo "New version: $NEW_VERSION"
-          
+
           # Update pack.mcmeta with new version
           jq --arg version "$NEW_VERSION" '.version = $version' pack.mcmeta > pack.mcmeta.tmp
           mv pack.mcmeta.tmp pack.mcmeta
-          
+
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
-      
+
       - name: Commit and push version bump
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          
+
           git add pack.mcmeta
           git commit -m "Bump version to ${{ steps.bump_version.outputs.new_version }}"
           git push
-      
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
@@ -132,17 +132,17 @@ jobs:
           name: "NoopCraft Pack v${{ steps.get_version.outputs.version }}"
           body: |
             ## NoopCraft Resource Pack v${{ steps.get_version.outputs.version }}
-            
+
             **Build Information:**
             - Commit: ${{ github.sha }}
             - Branch: ${{ github.ref_name }}
             - Build Date: ${{ github.event.head_commit.timestamp }}
-            
+
             **Changes:**
             ${{ github.event.head_commit.message }}
-            
+
             ---
-            
+
             Download the ZIP file below and place it in your Minecraft resource packs folder.
           files: |
             ${{ env.zip_name }}
