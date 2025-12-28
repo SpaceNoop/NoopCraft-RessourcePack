@@ -11,6 +11,8 @@ permissions:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+    # Skip workflow if the commit message starts with "Bump version"
+    if: "!startsWith(github.event.head_commit.message, 'Bump version')"
 
     steps:
       - name: Checkout repository
