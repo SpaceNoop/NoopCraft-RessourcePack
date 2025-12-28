@@ -39,7 +39,7 @@ jobs:
           mkdir -p build-temp
 
           # Copy all files except .git
-          rsync -av --exclude='.git' ./ build-temp/
+          rsync -av --exclude='.git' --exclude='build-temp' ./ build-temp/
 
           # Read .compileignore and remove matching files/directories
           if [ -f ".compileignore" ]; then

@@ -5,4 +5,3 @@ README.md
 .compileignore
 .gitignore
 .github/
-build-temp/
