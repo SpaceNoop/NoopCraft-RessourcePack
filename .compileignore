@@ -1,0 +1,6 @@
+.vscode
+README.md
+*.devonly
+*.devonly/
+.compileignore
+.gitignore
