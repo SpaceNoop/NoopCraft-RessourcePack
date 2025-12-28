@@ -82,13 +82,12 @@ jobs:
       - name: Create ZIP archive
         run: |
           VERSION="${{ steps.get_version.outputs.version }}"
-          ZIP_NAME="NoopCraft pack - $VERSION.zip"
-
-          # Create ZIP from build-temp directory, maintaining structure
+          ZIP_NAME="NoopCraft pack - ${VERSION}.zip"
+      
           cd build-temp
           zip -r "../$ZIP_NAME" . -x "*.git*"
           cd ..
-
+      
           echo "Created ZIP: $ZIP_NAME"
           ls -lh "$ZIP_NAME"
           printf '%s\n' "zip_name=$ZIP_NAME" >> $GITHUB_ENV
@@ -109,7 +108,7 @@ jobs:
             **Changes:**
             ${{ github.event.head_commit.message }}
           files: |
-            ${{ env.zip_name }}
+            "${{ env.zip_name }}"
           draft: false
           prerelease: false
           make_latest: true
