@@ -520,6 +520,66 @@
 
             {
                 "when": {
+                    "strings": ["tower-defense", "editor/export"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/export_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/export"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/export_off"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/export"]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/export_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
+                    "strings": ["tower-defense", "editor/import"],
+                    "flags": [true]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/import_on"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/import"],
+                    "flags": [false]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/import_off"
+                }
+            },{
+                "when": {
+                    "strings": ["tower-defense", "editor/import"]
+                },
+                "model": {
+                    "type": "model",
+                    "model": "spacenoop.tower-defense:editor/import_off"
+                }
+            },
+
+            
+
+            {
+                "when": {
                     "strings": ["tower-defense", "editor/path"],
                     "flags": [true]
                 },
