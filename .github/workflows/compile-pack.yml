@@ -33,6 +33,11 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Current version: $VERSION"
 
+      - name: Update language files
+        run: |
+          bash lang.devonly/updateLang.sh
+          echo "Language files updated from template"
+
       - name: Prepare build directory
         run: |
           # Create temporary build directory
@@ -143,6 +148,6 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
-          git add pack.mcmeta
+          git add pack.mcmeta assets/minecraft/lang/*.json
           git commit -m "Bump version to ${{ steps.bump_version.outputs.new_version }}"
           git push
