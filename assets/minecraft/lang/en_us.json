@@ -1,1 +1,4 @@
-{"container.inventory":""}
+{
+    "container.inventory":"",
+    "menu.custom_screen_info.contents": "You are stuck in this screen ?\nIf so, please let us know at the following email address:\n\n§bsupport@spacenoop.fr"
+}
