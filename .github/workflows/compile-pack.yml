@@ -87,7 +87,7 @@ jobs:
       - name: Create ZIP archive
         run: |
           VERSION="${{ steps.get_version.outputs.version }}"
-          ZIP_NAME="NoopCraft_Pack_v${VERSION}.zip"
+          ZIP_NAME="NoopCraft_Pack.zip"
 
           cd build-temp
           zip -r "../$ZIP_NAME" . -x "*.git*"
