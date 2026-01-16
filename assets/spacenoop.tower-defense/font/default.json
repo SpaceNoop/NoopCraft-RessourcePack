@@ -1,6 +1,10 @@
 {
     "providers": [
         {
+            "type": "reference",
+            "id": "spacenoop.tower-defense:space"
+        },
+        {
             "type": "bitmap",
             "file": "spacenoop.tower-defense:font/gui/spacenoop.png",
             "ascent": 17,
@@ -10,12 +14,6 @@
             ]
         },
         {
-            "type": "space",
-            "advances": {
-                "\uE099": -22
-            }
-        },
-        {
             "type": "bitmap",
             "file": "spacenoop.tower-defense:font/screen/spacenoop.png",
             "ascent": 24,
@@ -23,6 +21,13 @@
             "chars": [
                 "\uE101"
             ]
+        },
+        {
+            "type": "space",
+            "advances": {
+                " ": 4,
+                "‌": 0
+            }
         },
         {
             "type": "bitmap",
@@ -36,7 +41,7 @@
         {
             "type": "bitmap",
             "file": "spacenoop.tower-defense:font/hud/spacenoop.png",
-            "ascent": -10,
+            "ascent": 10,
             "height": 10,
             "chars": [
                 "\uE102"
