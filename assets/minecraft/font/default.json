@@ -3,12 +3,13 @@
         {
             "type": "space",
             "advances": {
-                " ": 4
+                " ": 4,
+                "‌": 0
             }
         },
         {
             "type":"reference",
-            "id":"spacenoop"
+            "id":"spacenoop.tower-defense:default"
         }
     ]
 }
