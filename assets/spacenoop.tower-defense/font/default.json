@@ -1,59 +1,6 @@
 {
     "providers": [
         {
-            "type": "reference",
-            "id": "spacenoop.tower-defense:space"
-        },
-        {
-            "type": "bitmap",
-            "file": "spacenoop.tower-defense:font/gui/spacenoop.png",
-            "ascent": 17,
-            "height": 256,
-            "chars": [
-                "\uE100"
-            ]
-        },
-        {
-            "type": "bitmap",
-            "file": "spacenoop.tower-defense:font/screen/spacenoop.png",
-            "ascent": 24,
-            "height": 60,
-            "chars": [
-                "\uE101"
-            ]
-        },
-        {
-            "type": "space",
-            "advances": {
-                " ": 4,
-                "‌": 0
-            }
-        },
-        {
-            "type": "bitmap",
-            "file": "spacenoop.tower-defense:font/hud/marker.png",
-            "ascent": -2048,
-            "height": 256,
-            "chars": [
-                "\u0001"
-            ]
-        },
-        {
-            "type": "bitmap",
-            "file": "spacenoop.tower-defense:font/hud/spacenoop.png",
-            "ascent": 10,
-            "height": 10,
-            "chars": [
-                "\uE102"
-            ]
-        },
-        {
-            "type": "space",
-            "advances": {
-                "\uE098": -64
-            }
-        },
-        {
             "type": "bitmap",
             "file": "spacenoop.tower-defense:font/void.png",
             "ascent": -64,
@@ -61,6 +8,23 @@
             "chars": [
                 "\uE095"
             ]
+        },
+
+        {
+            "type": "reference",
+            "id": "spacenoop.tower-defense:gui"
+        },
+        {
+            "type": "reference",
+            "id": "spacenoop.tower-defense:hud"
+        },
+        {
+            "type": "reference",
+            "id": "spacenoop.tower-defense:markers"
+        },
+        {
+            "type": "reference",
+            "id": "spacenoop.tower-defense:screen"
         }
     ]
 }

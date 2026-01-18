@@ -1,0 +1,13 @@
+{
+    "providers": [
+        {
+            "type": "bitmap",
+            "file": "spacenoop.tower-defense:font/markers/marker.png",
+            "ascent": -2048,
+            "height": 256,
+            "chars": [
+                "\uFFFE\uFFFD\uFFFC\uFFFB\uFFFA\uFFF9\uFFF8\uFFF7\uFFF6"
+            ]
+        }
+    ]
+}

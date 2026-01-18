@@ -1,0 +1,13 @@
+{
+    "providers": [
+        {
+            "type": "bitmap",
+            "file": "spacenoop.tower-defense:font/gui/spacenoop.png",
+            "ascent": 17,
+            "height": 256,
+            "chars": [
+                "\uE100"
+            ]
+        }
+    ]
+}
