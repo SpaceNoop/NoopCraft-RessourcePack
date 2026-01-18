@@ -65,16 +65,16 @@ void screenAnchor(int marker, vec2 offset, int anchor) {
             return;
     }
     
-    transform.position. x += offset.x;
+    transform.position.x += offset.x;
     transform.position.y += offset.y;
-    transform.screenOffset. x += screen.x;
+    transform.screenOffset.x += screen.x;
     transform.screenOffset.y += screen.y;
 }
 
 void main() {
     transform.position = Position;
     transform.screenSize = ScreenSize;
-    transform. screenOffset = vec4(0.0);
+    transform.screenOffset = vec4(0.0);
     
     transform.textureColor = texelFetch(Sampler2, ivec2(UV0 * 256.0), 0);
     
@@ -91,7 +91,7 @@ void main() {
     vec3 finalPos = transform.position;
     
     if (transform.screenOffset.x != 0.0 || transform.screenOffset.y != 0.0) {
-        finalPos. x += transform.screenOffset.x * (ScreenSize.x / 2.0);
+        finalPos.x += transform.screenOffset.x * (ScreenSize.x / 2.0);
         finalPos.y += transform.screenOffset.y * (ScreenSize.y / 2.0);
     }
     
