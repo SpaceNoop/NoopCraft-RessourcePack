@@ -3,7 +3,7 @@
         {
             "type": "bitmap",
             "file": "spacenoop.tower-defense:font/hud/spacenoop.png",
-            "ascent": -67,
+            "ascent": 0,
             "height": 10,
             "chars": [
                 "\uE102"

@@ -1,30 +1,33 @@
-#version 150
+#version 330
+
+#moj_import <minecraft:fog.glsl>
+#moj_import <minecraft:dynamictransforms.glsl>
+#moj_import <minecraft:projection.glsl>
 
 in vec3 Position;
 in vec4 Color;
 in vec2 UV0;
 in ivec2 UV2;
 
-uniform sampler2D Sampler0;
-uniform sampler2D Sampler2;
+uniform sampler2D Sampler0;  // Texture du caractère
+uniform sampler2D Sampler2;  // Lightmap
 
-uniform mat4 ModelViewMat;
-uniform mat4 ProjMat;
 uniform vec2 ScreenSize;
-uniform float GameTime;
 
+out float sphericalVertexDistance;
+out float cylindricalVertexDistance;
 out vec4 vertexColor;
 out vec2 texCoord0;
-out vec4 texColor;
+out vec4 markerColor;  // Couleur du marker
 
 struct Transform {
     vec4 textureColor;
     vec3 position;
     vec4 screenOffset;
-    vec2 screenSize;
 } transform;
 
 void screenAnchor(int marker, vec2 offset, int anchor) {
+    // Extraction de la valeur du marker depuis le canal rouge
     int detectedMarker = int(transform.textureColor.r * 255.0 + 0.5);
     
     if (detectedMarker != marker) {
@@ -34,31 +37,31 @@ void screenAnchor(int marker, vec2 offset, int anchor) {
     vec2 screen;
     
     switch(anchor) {
-        case 0: 
+        case 0:  // TOP_LEFT
             screen = vec2(-1.0, 2.0);
             break;
-        case 1:
+        case 1:  // TOP_RIGHT
             screen = vec2(1.0, 2.0);
             break;
-        case 2:
+        case 2:  // TOP_CENTER
             screen = vec2(0.0, 2.0);
             break;
-        case 3:
+        case 3:  // MIDDLE_LEFT
             screen = vec2(-1.0, 1.0);
             break;
-        case 4:
+        case 4:  // MIDDLE_RIGHT
             screen = vec2(1.0, 1.0);
             break;
-        case 5:
+        case 5:  // MIDDLE_CENTER
             screen = vec2(0.0, 1.0);
             break;
-        case 6:
+        case 6:  // BOTTOM_LEFT
             screen = vec2(-1.0, 0.0);
             break;
-        case 7:
+        case 7:  // BOTTOM_RIGHT
             screen = vec2(1.0, 0.0);
             break;
-        case 8:
+        case 8:  // BOTTOM_CENTER
             screen = vec2(0.0, 0.0);
             break;
         default:
@@ -72,22 +75,30 @@ void screenAnchor(int marker, vec2 offset, int anchor) {
 }
 
 void main() {
+    // Initialisation
     transform.position = Position;
-    transform.screenSize = ScreenSize;
     transform.screenOffset = vec4(0.0);
     
-    transform.textureColor = texelFetch(Sampler2, ivec2(UV0 * 256.0), 0);
+    // ═══════════════════════════════════════════════════════
+    // LECTURE DE LA COULEUR DU MARKER depuis Sampler0 ! 
+    // ═══════════════════════════════════════════════════════
     
-    screenAnchor(254, vec2(10.0, 10.0), 0);
-    screenAnchor(253, vec2(-10.0, 10.0), 1);
-    screenAnchor(252, vec2(0.0, 10.0), 2);
-    screenAnchor(251, vec2(10.0, 0.0), 3);
-    screenAnchor(250, vec2(-10.0, 0.0), 4);
-    screenAnchor(249, vec2(0.0, 0.0), 5);
-    screenAnchor(248, vec2(10.0, -10.0), 6);
-    screenAnchor(247, vec2(-10.0, -10.0), 7);
-    screenAnchor(246, vec2(0.0, -10.0), 8);
+    // On lit la couleur MOYENNE de la texture du caractère
+    // Pour un marker (1x1 pixel), ça donne directement la couleur RGBA
+    transform.textureColor = texture(Sampler0, UV0);
     
+    // Test des 9 markers
+    screenAnchor(254, vec2(10.0, 10.0), 0);   // TOP_LEFT
+    screenAnchor(253, vec2(-10.0, 10.0), 1);  // TOP_RIGHT
+    screenAnchor(252, vec2(0.0, 10.0), 2);    // TOP_CENTER
+    screenAnchor(251, vec2(10.0, 0.0), 3);    // MIDDLE_LEFT
+    screenAnchor(250, vec2(-10.0, 0.0), 4);   // MIDDLE_RIGHT
+    screenAnchor(249, vec2(0.0, 0.0), 5);     // MIDDLE_CENTER
+    screenAnchor(248, vec2(10.0, -10.0), 6);  // BOTTOM_LEFT
+    screenAnchor(247, vec2(-10.0, -10.0), 7); // BOTTOM_RIGHT
+    screenAnchor(246, vec2(0.0, -10.0), 8);   // BOTTOM_CENTER
+    
+    // Application du screenOffset
     vec3 finalPos = transform.position;
     
     if (transform.screenOffset.x != 0.0 || transform.screenOffset.y != 0.0) {
@@ -95,9 +106,19 @@ void main() {
         finalPos.y += transform.screenOffset.y * (ScreenSize.y / 2.0);
     }
     
+    // Transformation finale (comme vanilla)
     gl_Position = ProjMat * ModelViewMat * vec4(finalPos, 1.0);
     
-    vertexColor = Color;
+    // Calcul du fog (comme vanilla)
+    sphericalVertexDistance = fog_spherical_distance(finalPos);
+    cylindricalVertexDistance = fog_cylindrical_distance(finalPos);
+    
+    // Couleur avec lightmap (comme vanilla)
+    vertexColor = Color * texelFetch(Sampler2, UV2 / 16, 0);
+    
+    // Coordonnées de texture
     texCoord0 = UV0;
-    texColor = transform.textureColor;
+    
+    // Transmission de la couleur du marker au fragment shader
+    markerColor = transform.textureColor;
 }
